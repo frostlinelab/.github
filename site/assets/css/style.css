@@ -130,6 +130,9 @@ a:hover { text-decoration: underline; }
 }
 .brand:hover { text-decoration: none; }
 .brand svg { display: block; }
+/* The org mark is a dark tile with transparent corners, so it needs no plate of
+   its own in either theme — it reads on the light and the dark header alike. */
+.brand__mark { display: block; width: 24px; height: 24px; border-radius: 6px; }
 .brand__name small {
   display: block;
   font-weight: 450;

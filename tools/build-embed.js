@@ -160,7 +160,7 @@ function gridCell(p) {
     `<td width="50%" valign="top">`,
     `  <a href="${esc(primaryUrl(p))}"><img src="${bannerUrl(p)}" alt="${esc(p.name)} — ${esc(label(p.tagline))}" width="100%"></a>`,
     `  <p>`,
-    `    <a href="${esc(primaryUrl(p))}"><img src="${logoUrl(p)}" alt="" width="16" height="16"></a> <strong><a href="${esc(primaryUrl(p))}">${esc(p.name)}</a></strong><br>`,
+    `    <a href="${esc(primaryUrl(p))}"><img src="${logoUrl(p)}" alt="" width="20" height="20"></a> <strong><a href="${esc(primaryUrl(p))}">${esc(p.name)}</a></strong><br>`,
     `    ${esc(label(p.tagline))}<br>`,
     `    <sub>${esc(p.tagline.zh)}</sub><br>`,
     `    <sub>${meta.join(" · ")}</sub>`,

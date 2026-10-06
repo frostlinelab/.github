@@ -237,7 +237,7 @@
       "updated": null,
       "accent": "#3D7BF7",
       "banner": "assets/banners/frostline-physics.svg",
-      "logo": "assets/logos/frostline-physics.svg",
+      "logo": "assets/logos/frostline-physics.webp",
       "links": [
         { "kind": "bilibili", "label": { "en": "Bilibili", "zh": "B站" }, "url": null },
         { "kind": "youtube",  "label": { "en": "YouTube",  "zh": "YouTube" }, "url": null }
