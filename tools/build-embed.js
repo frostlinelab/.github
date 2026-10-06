@@ -160,7 +160,7 @@ function gridCell(p) {
     `<td width="50%" valign="top">`,
     `  <a href="${esc(primaryUrl(p))}"><img src="${bannerUrl(p)}" alt="${esc(p.name)} — ${esc(label(p.tagline))}" width="100%"></a>`,
     `  <p>`,
-    `    <img src="${logoUrl(p)}" alt="" width="16" height="16"> <strong><a href="${esc(primaryUrl(p))}">${esc(p.name)}</a></strong><br>`,
+    `    <a href="${esc(primaryUrl(p))}"><img src="${logoUrl(p)}" alt="" width="16" height="16"></a> <strong><a href="${esc(primaryUrl(p))}">${esc(p.name)}</a></strong><br>`,
     `    ${esc(label(p.tagline))}<br>`,
     `    <sub>${esc(p.tagline.zh)}</sub><br>`,
     `    <sub>${meta.join(" · ")}</sub>`,
@@ -240,6 +240,22 @@ function checkAttributes(html, what) {
     }
   }
   if (!problems) pass(`${what}: only allowlisted attributes used`);
+}
+
+/* GitHub auto-wraps any image that is not already inside a link, and adds its own
+   fallback styling (grey rounded background) while it is at it. Wrapping every <img>
+   in an <a> keeps our markup exactly as generated — verified against the live org page. */
+function checkImagesAreLinked(html, what) {
+  let problems = 0;
+  for (const line of html.split("\n")) {
+    const img = line.indexOf("<img");
+    if (img === -1) continue;
+    if (line.lastIndexOf("<a ", img) === -1) {
+      fail(`${what}: an <img> is not wrapped in a link — GitHub would auto-link it and restyle it`);
+      problems++;
+    }
+  }
+  if (!problems) pass(`${what}: every <img> sits inside a link, so GitHub leaves the markup alone`);
 }
 
 function checkForbidden(html, what) {
@@ -360,6 +376,7 @@ async function main() {
   checkForbidden(grid, "org-grid");
   checkTags(grid, "org-grid");
   checkAttributes(grid, "org-grid");
+  checkImagesAreLinked(grid, "org-grid");
   checkTagsBalanced(grid, "org-grid");
 
   console.log("\nAsset URLs (used by the embeds)");
