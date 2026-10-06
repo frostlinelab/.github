@@ -242,9 +242,14 @@ function checkAttributes(html, what) {
   if (!problems) pass(`${what}: only allowlisted attributes used`);
 }
 
-/* GitHub auto-wraps any image that is not already inside a link, and adds its own
-   fallback styling (grey rounded background) while it is at it. Wrapping every <img>
-   in an <a> keeps our markup exactly as generated — verified against the live org page. */
+/* GitHub auto-links any image that is not already inside a link, pointing it at the
+   image file itself. Wrapping every <img> in an <a> keeps the target ours.
+
+   It does NOT suppress GitHub's fallback styling: small images come back with
+   class="js-gh-image-fallback" and background-color: var(--bgColor-muted) + a 6px
+   radius no matter what wraps them. That is size-based — the 820px banners escape it,
+   the 16/28px logos do not. Visually harmless (the tint is the page background, and
+   the logos are transparent), so it is left alone. Verified against the live pages. */
 function checkImagesAreLinked(html, what) {
   let problems = 0;
   for (const line of html.split("\n")) {
