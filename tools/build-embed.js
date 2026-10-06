@@ -189,7 +189,7 @@ function buildPerRepo(p) {
 
 <!-- Footer card (recommended) -->
 <p align="center">
-  <img src="${logoUrl(p)}" alt="" width="28" height="28"><br>
+  <a href="${SITE_BASE}"><img src="${logoUrl(p)}" alt="" width="28" height="28"></a><br>
   <sub>Part of <a href="${SITE_BASE}">Frostline Lab</a> · <a href="${SITE_BASE}/gallery.html#${p.id}">All projects</a></sub>
 </p>
 `;
@@ -378,6 +378,18 @@ async function main() {
   checkAttributes(grid, "org-grid");
   checkImagesAreLinked(grid, "org-grid");
   checkTagsBalanced(grid, "org-grid");
+
+  /* The per-repo snippets land in other repositories' READMEs, so they get the
+     same treatment as the grid — a stripped tag there is just as invisible. */
+  for (const p of data.projects.filter((x) => x.repo)) {
+    const what = `per-repo/${p.id}`;
+    const snippet = buildPerRepo(p);
+    checkForbidden(snippet, what);
+    checkTags(snippet, what);
+    checkAttributes(snippet, what);
+    checkImagesAreLinked(snippet, what);
+    checkTagsBalanced(snippet, what);
+  }
 
   console.log("\nAsset URLs (used by the embeds)");
   const urls = [...new Set(data.projects.flatMap((p) => [bannerUrl(p), logoUrl(p)]))];

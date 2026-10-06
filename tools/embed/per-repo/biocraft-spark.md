@@ -7,6 +7,6 @@
 
 <!-- Footer card (recommended) -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/frostlinelab/.github/main/site/assets/logos/biocraft-spark.svg" alt="" width="28" height="28"><br>
+  <a href="https://frostlinelab.pages.dev"><img src="https://raw.githubusercontent.com/frostlinelab/.github/main/site/assets/logos/biocraft-spark.svg" alt="" width="28" height="28"></a><br>
   <sub>Part of <a href="https://frostlinelab.pages.dev">Frostline Lab</a> · <a href="https://frostlinelab.pages.dev/gallery.html#biocraft-spark">All projects</a></sub>
 </p>
