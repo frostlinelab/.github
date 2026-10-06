@@ -156,9 +156,16 @@ function chromeOnce(extra, { wantDom = false, wantFile = null, timeout = 30000 }
   });
 }
 
-async function dom(url) {
-  const { out } = await chromeOnce(["--virtual-time-budget=5000", "--dump-dom", url], { wantDom: true });
-  return out;
+/* The page sets data-ready once projects.json is rendered, so retry instead of
+   hoping the virtual time budget covered the fetch. */
+async function dom(url, attempts = 3) {
+  let last = "";
+  for (let i = 0; i < attempts; i++) {
+    const { out } = await chromeOnce(["--virtual-time-budget=8000", "--dump-dom", url], { wantDom: true });
+    last = out;
+    if (out.includes("data-ready=")) return out;
+  }
+  return last;
 }
 
 async function screenshot(name, url, size = "1280,1050") {
@@ -170,6 +177,87 @@ async function screenshot(name, url, size = "1280,1050") {
     { wantFile: file }
   );
   return file;
+}
+
+/* ---------- interactive session (CDP) ---------- */
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function cdp(url, port = 9223) {
+  const child = spawn(CHROME, [...BASE_ARGS, `--remote-debugging-port=${port}`, "about:blank"], {
+    stdio: ["ignore", "pipe", "pipe"],
+    detached: true
+  });
+  const close = () => {
+    try {
+      process.kill(-child.pid, "SIGKILL");
+    } catch {
+      child.kill("SIGKILL");
+    }
+  };
+
+  let target = null;
+  for (let i = 0; i < 60 && !target; i++) {
+    await sleep(250);
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: "PUT" });
+      target = await res.json();
+    } catch {
+      try {
+        const list = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
+        target = list.find((t) => t.type === "page") || null;
+      } catch {
+        /* chrome not up yet */
+      }
+    }
+  }
+  if (!target || !target.webSocketDebuggerUrl) {
+    close();
+    return null;
+  }
+
+  const ws = new WebSocket(target.webSocketDebuggerUrl);
+  const pending = new Map();
+  let nextId = 1;
+  await new Promise((resolve, reject) => {
+    ws.addEventListener("open", resolve, { once: true });
+    ws.addEventListener("error", reject, { once: true });
+    setTimeout(reject, 10000);
+  });
+  ws.addEventListener("message", (event) => {
+    const msg = JSON.parse(event.data);
+    const slot = pending.get(msg.id);
+    if (slot) {
+      pending.delete(msg.id);
+      slot(msg);
+    }
+  });
+
+  const send = (method, params) =>
+    new Promise((resolve) => {
+      const id = nextId++;
+      pending.set(id, resolve);
+      ws.send(JSON.stringify({ id, method, params }));
+    });
+
+  const evaluate = async (expression) => {
+    const res = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
+    return res?.result?.result?.value;
+  };
+
+  await send("Page.enable", {});
+  await send("Page.navigate", { url });
+
+  const destroy = () => {
+    try {
+      ws.close();
+    } catch {
+      /* already gone */
+    }
+    close();
+  };
+
+  return { evaluate, destroy };
 }
 
 /* ---------- checks ---------- */
@@ -243,6 +331,43 @@ async function main() {
 
   const homeZh = await dom(`${BASE}/index.html?lang=zh`);
   check("homepage switches to Chinese", homeZh.includes("物理专业版"));
+
+  console.log("\nSaved projects (interactive, via DevTools protocol)");
+  const session = await cdp(`${BASE}/gallery.html?lang=en`);
+  if (!session) {
+    check("attach to a DevTools session", false, "could not reach Chrome's debugging port");
+  } else {
+    let cards = -1;
+    for (let i = 0; i < 40 && cards !== 4; i++) {
+      await sleep(250);
+      cards = (await session.evaluate("document.querySelectorAll('.card').length")) ?? -1;
+    }
+    check("gallery finishes rendering before interacting", cards === 4, `found ${cards}`);
+
+    await session.evaluate(`document.querySelector('[data-fav="vitreo"]').click()`);
+    await sleep(250);
+    check("clicking the heart marks the project saved",
+      (await session.evaluate(`document.querySelector('[data-fav="vitreo"]').getAttribute('aria-pressed')`)) === "true");
+    check("the saved set is persisted for the next visit",
+      (await session.evaluate(`JSON.parse(localStorage.getItem('frostline.favs.v1') || '[]').join(',')`)) === "vitreo");
+    check("the copy-list button becomes available",
+      (await session.evaluate(`!document.querySelector('[data-copy-favs]').disabled`)) === true);
+
+    await session.evaluate(`document.querySelector('[data-only-favs]').click()`);
+    await sleep(250);
+    check("'saved only' narrows the gallery to that project",
+      (await session.evaluate("document.querySelectorAll('.card').length")) === 1);
+    check("the filter state is written to the URL for sharing",
+      String(await session.evaluate("location.search")).includes("fav=1"));
+
+    await session.evaluate(`document.querySelector('[data-fav="vitreo"]').click()`);
+    await sleep(250);
+    check("clicking again un-saves it and the empty state returns",
+      (await session.evaluate("document.querySelectorAll('.card').length")) === 0 &&
+        (await session.evaluate("JSON.parse(localStorage.getItem('frostline.favs.v1') || '[]').length")) === 0);
+
+    session.destroy();
+  }
 
   console.log("\nREADME embed (GitHub sanitizer simulation)");
   const previewHtml = await readFile(path.join(__dirname, "embed", "preview.html"), "utf8");

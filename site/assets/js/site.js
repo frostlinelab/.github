@@ -294,7 +294,10 @@
     if (state.favs.has(id)) state.favs.delete(id);
     else state.favs.add(id);
     write(FAV_KEY, JSON.stringify([...state.favs]));
-    syncFavUi();
+    /* While the "saved only" filter is on, a card leaving the saved set has to
+       leave the grid too — otherwise the view contradicts the filter. */
+    if (state.filters.favsOnly) update();
+    else syncFavUi();
   }
 
   function syncFavUi() {
@@ -527,6 +530,7 @@
     } catch (err) {
       applyStatic();
       fail(`Could not load ${DATA_URL} (${err.message}).`);
+      document.body.dataset.ready = "error";
       return;
     }
 
@@ -549,6 +553,9 @@
       }
     }
     update();
+    /* Readiness beacon: lets tools/smoke-test.mjs wait for a fully rendered page
+       instead of guessing at a timeout. */
+    document.body.dataset.ready = "1";
   }
 
   document.addEventListener("DOMContentLoaded", boot);
