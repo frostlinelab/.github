@@ -118,7 +118,22 @@
     if (f.favsOnly) p.set("fav", "1");
     if (state.lang !== "en") p.set("lang", state.lang);
     const qs = p.toString();
-    history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+    /* Carry location.hash through: the READMEs deep-link to a project with
+       /gallery#vitreo, and rebuilding the query string from scratch would drop it
+       before anything could read it. */
+    history.replaceState(null, "", (qs ? `?${qs}` : location.pathname) + location.hash);
+  }
+
+  /* The browser resolves a fragment while parsing, long before the cards exist, so
+     a deep link from a README never scrolls anywhere. Once the grid is on screen,
+     do it here and mark the card the link was pointing at. */
+  function focusHashTarget() {
+    const id = decodeURIComponent(location.hash.replace(/^#/, ""));
+    if (!id) return;
+    const card = document.getElementById(id);
+    if (!card) return;
+    card.classList.add("card--target");
+    card.scrollIntoView({ block: "center" });
   }
 
   /* ---------- filtering ---------- */
@@ -553,6 +568,7 @@
       }
     }
     update();
+    focusHashTarget();
     /* Readiness beacon: lets tools/smoke-test.mjs wait for a fully rendered page
        instead of guessing at a timeout. */
     document.body.dataset.ready = "1";

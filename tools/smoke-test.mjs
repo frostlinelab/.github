@@ -257,7 +257,9 @@ async function cdp(url, port = 9223) {
     close();
   };
 
-  return { evaluate, destroy };
+  const navigate = (url) => send("Page.navigate", { url });
+
+  return { evaluate, navigate, destroy };
 }
 
 /* ---------- checks ---------- */
@@ -365,6 +367,21 @@ async function main() {
     check("clicking again un-saves it and the empty state returns",
       (await session.evaluate("document.querySelectorAll('.card').length")) === 0 &&
         (await session.evaluate("JSON.parse(localStorage.getItem('frostline.favs.v1') || '[]').length")) === 0);
+
+    /* Every "Gallery" link in the READMEs is /gallery#<id>, so the fragment has to
+       survive boot and actually take the reader to that project. */
+    await session.navigate(`${BASE}/gallery.html?lang=en#vitreo`);
+    let target = "";
+    for (let i = 0; i < 40 && target !== "vitreo"; i++) {
+      await sleep(250);
+      target = (await session.evaluate("document.querySelector('.card--target')?.id")) || "";
+    }
+    check("a #project deep link marks the card it points at", target === "vitreo", `got "${target}"`);
+    check("the deep link survives the filter-state rewrite",
+      (await session.evaluate("location.hash")) === "#vitreo",
+      `hash is "${await session.evaluate("location.hash")}"`);
+    check("the deep link scrolls the card into view",
+      (await session.evaluate("window.scrollY")) > 0);
 
     session.destroy();
   }

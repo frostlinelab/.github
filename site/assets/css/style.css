@@ -618,6 +618,11 @@ a:hover { text-decoration: underline; }
 .hero--compact { padding: 46px 0 26px; }
 .hero--compact h1 { max-width: none; }
 
+/* Marks the card a deep link landed on, so a reader arriving from a README can see
+   which project sent them here. No animation, so it also survives reduced-motion;
+   it clears on the next re-render like any other view state. */
+.card--target { outline: 2px solid var(--accent, var(--brand)); outline-offset: 2px; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
