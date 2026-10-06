@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Biocraft-Spark">
+  <g stroke="#3FAE6A" stroke-width="30" stroke-linecap="round" opacity="0.45">
+    <path d="M168 168 H 344"/>
+    <path d="M256 168 V 344"/>
+  </g>
+  <circle cx="168" cy="168" r="58" fill="#3FAE6A"/>
+  <circle cx="344" cy="168" r="58" fill="none" stroke="#3FAE6A" stroke-width="30"/>
+  <circle cx="256" cy="344" r="58" fill="none" stroke="#3FAE6A" stroke-width="30"/>
+</svg>

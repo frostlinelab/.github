@@ -1,0 +1,247 @@
+{
+  "org": {
+    "name": "Frostline Lab",
+    "nameZh": "霜线实验室",
+    "github": "https://github.com/frostlinelab",
+    "site": "https://frostlinelab.pages.dev",
+    "email": null
+  },
+
+  "tags": {
+    "rust":            { "en": "Rust",            "zh": "Rust" },
+    "wgpu":            { "en": "wgpu",            "zh": "wgpu" },
+    "graphics":        { "en": "Graphics",        "zh": "图形" },
+    "glass":           { "en": "Glass material",  "zh": "玻璃材质" },
+    "python":          { "en": "Python",          "zh": "Python" },
+    "bioinformatics":  { "en": "Bioinformatics",  "zh": "生物信息" },
+    "django":          { "en": "Django",          "zh": "Django" },
+    "containers":      { "en": "Containers",      "zh": "容器" },
+    "plugins":         { "en": "Plugins",         "zh": "插件" },
+    "marketplace":     { "en": "Marketplace",     "zh": "市场" },
+    "physics":         { "en": "Physics",         "zh": "物理" },
+    "video":           { "en": "Video",           "zh": "视频" }
+  },
+
+  "ui": {
+    "en": {
+      "nav.home": "Home",
+      "nav.gallery": "Gallery",
+      "nav.github": "GitHub",
+      "nav.lang": "中文",
+
+      "meta.title.home": "Frostline Lab — local-first tools and physics media",
+      "meta.title.gallery": "Gallery — Frostline Lab",
+      "nav.theme": "Switch light / dark theme",
+
+      "hero.eyebrow": "Frostline Lab",
+      "hero.title": "Tools that freeze ideas into form.",
+      "hero.lede": "An independent lab building local-first software and physics media — precise instruments, quiet interfaces, nothing you don't need.",
+      "hero.cta1": "Explore the gallery",
+      "hero.cta2": "Frostline Physics",
+
+      "home.channel.kicker": "Channel",
+      "home.channel.body": "A physics-major's take on the 3Blue1Brown format: real derivations, honest rigor, and visuals generated from the actual equations. On Bilibili and YouTube.",
+      "home.projects.title": "Projects",
+      "home.projects.note": "Every project has its own banner and logo. Browse, filter and keep the ones you care about in the gallery.",
+      "home.about.title": "About",
+      "home.about.body": "Frostline Lab is a small independent studio. We build software that runs on your machine and explains itself, and we publish physics we wish someone had shown us.",
+
+      "gallery.title": "Project gallery",
+      "gallery.lede": "Filter by topic and status, search, and mark the projects you care about — your picks stay in this browser and can be copied as a list.",
+      "gallery.search": "Search projects",
+      "gallery.searchPlaceholder": "Search name, description, tag…",
+      "gallery.sort": "Sort",
+      "gallery.sort.featured": "Featured",
+      "gallery.sort.updated": "Recently updated",
+      "gallery.sort.name": "Name",
+      "gallery.tags": "Topics",
+      "gallery.status": "Status",
+      "gallery.status.all": "All",
+      "gallery.status.active": "Active",
+      "gallery.status.wip": "In progress",
+      "gallery.onlyFavs": "Saved only",
+      "gallery.copy": "Copy list",
+      "gallery.copied": "Copied",
+      "gallery.clear": "Clear filters",
+      "gallery.results": "{n} of {total} projects",
+      "gallery.empty": "Nothing matches those filters.",
+      "gallery.emptyFavs": "Nothing saved yet — hit the heart on a project you care about.",
+      "gallery.note": "Saved projects live in this browser only.",
+
+      "card.repo": "Repository",
+      "card.homepage": "Homepage",
+      "card.gallery": "Gallery",
+      "card.details": "Details",
+      "card.save": "Save",
+      "card.saved": "Saved",
+      "card.comingSoon": "Coming soon",
+      "card.updated": "Updated",
+
+      "footer.tagline": "Local-first software and physics media.",
+      "footer.built": "Site and gallery generated from one projects.json — no trackers, no fonts fetched from anywhere."
+    },
+    "zh": {
+      "nav.home": "主页",
+      "nav.gallery": "画廊",
+      "nav.github": "GitHub",
+      "nav.lang": "EN",
+
+      "meta.title.home": "霜线实验室 — 本地优先的软件与物理科普",
+      "meta.title.gallery": "项目画廊 — 霜线实验室",
+      "nav.theme": "切换浅色 / 深色主题",
+
+      "hero.eyebrow": "霜线实验室",
+      "hero.title": "把想法冻结成形。",
+      "hero.lede": "一个独立实验室：做本地优先的软件，也做物理科普媒体——精确的仪器、安静的界面，没有多余的东西。",
+      "hero.cta1": "进入画廊",
+      "hero.cta2": "Frostline Physics",
+
+      "home.channel.kicker": "频道",
+      "home.channel.body": "「物理专业版的 3Blue1Brown」：真正的推导、不缩水的严谨，画面直接由方程生成。在 B站与 YouTube 更新。",
+      "home.projects.title": "项目",
+      "home.projects.note": "每个项目都有专属的 Banner 与 Logo。去画廊里筛选、收藏你感兴趣的项目。",
+      "home.about.title": "关于",
+      "home.about.body": "霜线实验室是一个小型独立工作室。我们做在你自己的机器上运行、且能自我解释的软件；也发布我们当年希望有人讲给我们听的物理。",
+
+      "gallery.title": "项目画廊",
+      "gallery.lede": "按主题与状态筛选、搜索，并收藏你感兴趣的项目——收藏只留在本浏览器里，可一键复制成清单。",
+      "gallery.search": "搜索项目",
+      "gallery.searchPlaceholder": "搜索名称、描述、标签…",
+      "gallery.sort": "排序",
+      "gallery.sort.featured": "精选优先",
+      "gallery.sort.updated": "最近更新",
+      "gallery.sort.name": "名称",
+      "gallery.tags": "主题",
+      "gallery.status": "状态",
+      "gallery.status.all": "全部",
+      "gallery.status.active": "活跃",
+      "gallery.status.wip": "进行中",
+      "gallery.onlyFavs": "仅看收藏",
+      "gallery.copy": "复制收藏清单",
+      "gallery.copied": "已复制",
+      "gallery.clear": "清除筛选",
+      "gallery.results": "{n} / {total} 个项目",
+      "gallery.empty": "没有符合当前筛选的项目。",
+      "gallery.emptyFavs": "还没有收藏——点一下项目卡片上的爱心。",
+      "gallery.note": "收藏仅保存在本浏览器。",
+
+      "card.repo": "仓库",
+      "card.homepage": "主页",
+      "card.gallery": "画廊",
+      "card.details": "详情",
+      "card.save": "收藏",
+      "card.saved": "已收藏",
+      "card.comingSoon": "即将上线",
+      "card.updated": "更新于",
+
+      "footer.tagline": "本地优先的软件，与物理科普媒体。",
+      "footer.built": "站点与画廊由同一份 projects.json 生成——无跟踪器，不加载任何外部字体。"
+    }
+  },
+
+  "projects": [
+    {
+      "id": "vitreo",
+      "kind": "software",
+      "name": "Vitreo",
+      "repo": "https://github.com/frostlinelab/vitreo",
+      "homepage": null,
+      "tagline": {
+        "en": "Write once, refract everywhere.",
+        "zh": "一次编写，处处折射。"
+      },
+      "description": {
+        "en": "A renderer-agnostic glass-material layer on wgpu: SDF refraction, chromatic dispersion and Fresnel edge glow in a single fragment pass. Any app can give any region an Apple Liquid-Glass-grade material.",
+        "zh": "基于 wgpu 的渲染器无关玻璃材质层：SDF 折射、色散与 Fresnel 边缘高光在一次片元着色中完成。任何应用的任意区域都能获得 Apple Liquid Glass 级材质。"
+      },
+      "tags": ["rust", "wgpu", "graphics", "glass"],
+      "language": "Rust",
+      "license": "MIT",
+      "status": "active",
+      "featured": true,
+      "updated": "2026-10-06",
+      "accent": "#2BB3C0",
+      "banner": "assets/banners/vitreo.svg",
+      "logo": "assets/logos/vitreo.svg",
+      "links": []
+    },
+    {
+      "id": "biocraft-spark",
+      "kind": "software",
+      "name": "Biocraft-Spark",
+      "repo": "https://github.com/frostlinelab/biocraft-spark",
+      "homepage": null,
+      "tagline": {
+        "en": "Bioinformatics without the Linux barrier.",
+        "zh": "不需要 Linux 经验的生物信息学工作台。"
+      },
+      "description": {
+        "en": "A local, cross-platform workbench that hides environment complexity behind a GUI and container isolation — visual pipelines, reproducible runs, your data never leaves the machine.",
+        "zh": "本地跨平台工作台：用图形界面与容器隔离隐藏环境复杂性——可视化流程、可复现运行，数据始终留在本机。"
+      },
+      "tags": ["python", "bioinformatics", "django", "containers"],
+      "language": "Python",
+      "license": "MIT",
+      "status": "active",
+      "featured": true,
+      "updated": "2026-08-10",
+      "accent": "#3FAE6A",
+      "banner": "assets/banners/biocraft-spark.svg",
+      "logo": "assets/logos/biocraft-spark.svg",
+      "links": []
+    },
+    {
+      "id": "biocraft-marketplace",
+      "kind": "software",
+      "name": "Biocraft Marketplace",
+      "repo": "https://github.com/frostlinelab/biocraft-marketplace",
+      "homepage": null,
+      "tagline": {
+        "en": "Curation is certification.",
+        "zh": "策展即认证。"
+      },
+      "description": {
+        "en": "The plugin registry behind Biocraft-Spark. Every plugin is reviewed before it enters, and the Beautiful Creatures selection marks the curated few. Built as a static catalog on Cloudflare Pages.",
+        "zh": "Biocraft-Spark 的插件注册中心：每个插件都先审后上架，「Beautiful Creatures」精选名单标出最值得信赖的一批。整个目录以静态站点形式托管在 Cloudflare Pages。"
+      },
+      "tags": ["plugins", "marketplace", "python"],
+      "language": "Python",
+      "license": null,
+      "status": "active",
+      "featured": false,
+      "updated": "2026-07-25",
+      "accent": "#7C6CF0",
+      "banner": "assets/banners/biocraft-marketplace.svg",
+      "logo": "assets/logos/biocraft-marketplace.svg",
+      "links": []
+    },
+    {
+      "id": "frostline-physics",
+      "kind": "channel",
+      "name": "Frostline Physics",
+      "repo": null,
+      "homepage": null,
+      "tagline": {
+        "en": "Rigorous physics, visual intuition.",
+        "zh": "硬核物理，可视直觉。"
+      },
+      "description": {
+        "en": "Our channel on Bilibili and YouTube — a physics-major's take on the 3Blue1Brown format: real derivations, honest rigor, and visuals generated from the actual equations.",
+        "zh": "我们在 B站 与 YouTube 的频道——「物理专业版的 3Blue1Brown」：真正的推导、不缩水的严谨，画面直接由方程生成。"
+      },
+      "tags": ["physics", "video"],
+      "language": null,
+      "license": null,
+      "status": "wip",
+      "featured": true,
+      "updated": null,
+      "accent": "#3D7BF7",
+      "banner": "assets/banners/frostline-physics.svg",
+      "logo": "assets/logos/frostline-physics.svg",
+      "links": [
+        { "kind": "bilibili", "label": { "en": "Bilibili", "zh": "B站" }, "url": null },
+        { "kind": "youtube",  "label": { "en": "YouTube",  "zh": "YouTube" }, "url": null }
+      ]
+    }
+  ]
+}

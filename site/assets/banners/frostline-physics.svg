@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Frostline Physics — rigorous physics, visual intuition. The Frostline Lab channel.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7F9FE"/>
+      <stop offset="1" stop-color="#E6EDFB"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <g transform="translate(0 0)">
+    <text x="1010" y="420" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="300" fill="#3D7BF7" fill-opacity="0.10">ψ</text>
+    <path d="M620 388 H 1140" stroke="#8794A8" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="7 7"/>
+    <path d="M640 388 C 680 268 720 268 760 388 S 840 508 880 388 S 960 268 1000 388 S 1080 508 1120 388"
+          fill="none" stroke="#3D7BF7" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="760" cy="388" r="7" fill="#3D7BF7"/>
+    <circle cx="880" cy="388" r="7" fill="#3D7BF7"/>
+    <circle cx="1000" cy="388" r="7" fill="#3D7BF7"/>
+  </g>
+
+  <text x="72" y="140" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="20" letter-spacing="5" fill="#8794A8">FROSTLINE LAB</text>
+  <rect x="72" y="352" width="54" height="5" rx="2.5" fill="#3D7BF7"/>
+  <text x="72" y="438" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="68" font-weight="700" letter-spacing="-1.5" fill="#0F1722">Frostline Physics</text>
+  <text x="72" y="496" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="27" fill="#55637A">Rigorous physics, visual intuition.</text>
+  <text x="72" y="600" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="19" fill="#8794A8">Bilibili · YouTube</text>
+</svg>
